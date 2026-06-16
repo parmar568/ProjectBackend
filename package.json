@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "cd backend && node server.js",
+    "install": "cd backend && npm install",
     "dev": "concurrently \"npm run backend-dev\" \"npm run frontend\"",
     "backend": "npm start --prefix backend",
     "backend-dev": "npm run dev --prefix backend",
