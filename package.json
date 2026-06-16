@@ -1,9 +1,8 @@
 {
   "name": "parking-management-system",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "start": "cd backend && node server.js",
     "dev": "concurrently \"npm run backend-dev\" \"npm run frontend\"",
     "backend": "npm start --prefix backend",
     "backend-dev": "npm run dev --prefix backend",
