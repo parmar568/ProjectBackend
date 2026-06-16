@@ -1,0 +1,133 @@
+.feedback-page {
+  background: #ffffff;
+  color: #475569;
+  min-height: 100vh;
+  padding-top: 140px;
+}
+
+.feedback-container {
+  max-width: 900px;
+  margin: 0 auto 100px;
+  padding: 60px;
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+}
+
+.feedback-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.feedback-header h2 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: #1e3c72;
+  margin-bottom: 15px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+}
+
+.feedback-header p {
+  color: #64748b;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group label {
+  font-weight: 800;
+  color: #1e3c72;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.form-group select,
+.form-group textarea,
+.form-group input {
+  padding: 18px 24px;
+  border: 2px solid #f1f5f9;
+  border-radius: 16px;
+  font-size: 16px;
+  background: #f8fafc;
+  color: #1e293b;
+  font-weight: 600;
+  transition: all 0.3s;
+  outline: none;
+}
+
+.form-group select:focus,
+.form-group textarea:focus,
+.form-group input:focus {
+  border-color: #10b981;
+  background: #ffffff;
+  box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.1);
+  transform: scale(1.01);
+}
+
+.rating-stars {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+  color: #e2e8f0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.star-btn:hover {
+  transform: scale(1.2);
+}
+
+.star-btn.active {
+  color: #f59e0b;
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.3));
+}
+
+.submit-feedback-btn {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  padding: 20px;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 10px 20px rgba(30, 60, 114, 0.2);
+}
+
+.submit-feedback-btn:hover {
+  background: linear-gradient(135deg, #2a5298, #1e3c72);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(30, 60, 114, 0.3);
+}
+
+.submit-feedback-btn:disabled {
+  background: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

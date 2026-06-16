@@ -1,0 +1,39 @@
+
+services:
+  - type: web
+    name: milan-parking-backend
+    env: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: node backend/server.js
+    rootDir: ./
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        fromDatabase:
+          name: milan-parking-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_PASS
+        sync: false
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: PAYPAL_MODE
+        value: sandbox
+
+databases:
+  - name: milan-parking-db
+    databaseName: parkingDB
+    user: milan
+    plan: starter
+    region: oregon
+

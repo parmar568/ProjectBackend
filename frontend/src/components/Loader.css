@@ -1,0 +1,30 @@
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f7f6;
+  color: #1e3c72;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #1e3c72;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1.5s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+p {
+  font-weight: 600;
+  letter-spacing: 1px;
+}

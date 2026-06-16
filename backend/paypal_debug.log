@@ -1,0 +1,54 @@
+[2026-04-22T07:01:28.090Z] >>> RECEIVED REQUEST: /create-paypal-order
+[2026-04-22T07:01:28.106Z] >>> Request Body: {"amount":40,"bookingDetails":{"area":"CG Road","city":"Ahmedabad","slotNumber":1}}
+[2026-04-22T07:01:28.125Z] >>> Creating Order with amount: 40.00
+[2026-04-22T07:01:30.239Z] >>> PayPal API Error: 
+[2026-04-22T07:01:30.240Z] >>> Full API Error: {
+  "error": "invalid_client",
+  "error_description": "Client Authentication failed"
+}
+[2026-04-22T07:01:30.244Z] >>> FINAL ERROR in /create-paypal-order: PayPal SDK Error: 
+[2026-04-22T07:07:25.493Z] >>> RECEIVED REQUEST: /create-paypal-order
+[2026-04-22T07:07:25.494Z] >>> Request Body: {"amount":40,"bookingDetails":{"area":"CG Road","city":"Ahmedabad","slotNumber":1}}
+[2026-04-22T07:07:25.496Z] >>> Creating Order with amount: 40.00
+[2026-04-22T07:07:25.496Z] >>> PayPal Init: ID=AUn-H...QDBgB, Secret=EAvFW...d7YfX, Mode=sandbox
+[2026-04-22T07:07:26.207Z] >>> PayPal API Error: 
+[2026-04-22T07:07:26.208Z] >>> Full API Error: {
+  "error": "invalid_client",
+  "error_description": "Client Authentication failed"
+}
+[2026-04-22T07:07:26.210Z] >>> FINAL ERROR in /create-paypal-order: PayPal SDK Error: 
+[2026-04-22T07:09:38.782Z] >>> RECEIVED REQUEST: /create-paypal-order
+[2026-04-22T07:09:38.784Z] >>> Request Body: {"amount":40,"bookingDetails":{"area":"CG Road","city":"Ahmedabad","slotNumber":1}}
+[2026-04-22T07:09:38.785Z] >>> Creating Order with amount: 40.00
+[2026-04-22T07:09:38.786Z] >>> PayPal Init: ID=AUn-H...QDBgB, Secret=EAvFW...d7YfX, Mode=sandbox
+[2026-04-22T07:09:40.849Z] >>> Order created successfully: 33S08943CS846505G
+[2026-04-22T07:25:37.680Z] >>> RECEIVED REQUEST: /create-paypal-order
+[2026-04-22T07:25:37.681Z] >>> Request Body: {"amount":40,"bookingDetails":{"area":"CG Road","city":"Ahmedabad","slotNumber":1}}
+[2026-04-22T07:25:37.682Z] >>> Creating Order with amount: 40.00
+[2026-04-22T07:25:39.176Z] >>> Order created successfully: 5UP34553ER862524H
+[2026-04-22T07:35:08.287Z] >>> RECEIVED REQUEST: /create-paypal-order
+[2026-04-22T07:35:08.399Z] >>> Request Body: {"amount":40,"bookingDetails":{"area":"CG Road","city":"Ahmedabad","slotNumber":1}}
+[2026-04-22T07:35:08.406Z] >>> Creating Order with amount: 40.00
+[2026-04-22T07:35:08.471Z] >>> PayPal Init: ID=AUn-H...QDBgB, Secret=EAvFW...d7YfX, Mode=sandbox
+[2026-04-22T07:35:10.899Z] >>> Order created successfully: 6AW71387YV350701C
+[2026-04-22T07:35:30.045Z] >>> RECEIVED REQUEST: /create-paypal-order
+[2026-04-22T07:35:30.054Z] >>> Request Body: {"amount":40,"bookingDetails":{"area":"CG Road","city":"Ahmedabad","slotNumber":1}}
+[2026-04-22T07:35:30.092Z] >>> Creating Order with amount: 40.00
+[2026-04-22T07:35:31.602Z] >>> Order created successfully: 86P09040L80170156
+[2026-04-22T07:37:20.078Z] >>> RECEIVED REQUEST: /create-paypal-order
+[2026-04-22T07:37:20.144Z] >>> Request Body: {"amount":40,"bookingDetails":{"area":"CG Road","city":"Ahmedabad","slotNumber":1}}
+[2026-04-22T07:37:20.164Z] >>> Creating Order with amount: 40.00
+[2026-04-22T07:37:21.659Z] >>> Order created successfully: 28A44468WL250700H
+[2026-04-22T07:40:50.542Z] >>> RECEIVED REQUEST: /create-paypal-order
+[2026-04-22T07:40:50.552Z] >>> Request Body: {"amount":40,"bookingDetails":{"area":"CG Road","city":"Ahmedabad","slotNumber":1}}
+[2026-04-22T07:40:50.581Z] >>> Creating Order with amount: 40.00
+[2026-04-22T07:40:53.030Z] >>> Order created successfully: 0HK5886201753973E
+[2026-04-22T07:41:12.843Z] >>> RECEIVED REQUEST: /create-paypal-order
+[2026-04-22T07:41:12.858Z] >>> Request Body: {"amount":40,"bookingDetails":{"area":"CG Road","city":"Ahmedabad","slotNumber":1}}
+[2026-04-22T07:41:12.863Z] >>> Creating Order with amount: 40.00
+[2026-04-22T07:41:14.296Z] >>> Order created successfully: 46Y31633985984113
+[2026-04-22T08:20:04.897Z] >>> RECEIVED REQUEST: /create-paypal-order
+[2026-04-22T08:20:04.902Z] >>> Request Body: {"amount":40,"bookingDetails":{"area":"CG Road","city":"Ahmedabad","slotNumber":1}}
+[2026-04-22T08:20:04.904Z] >>> Creating Order with amount: 40.00
+[2026-04-22T08:20:04.908Z] >>> PayPal Init: ID=AUn-H...QDBgB, Secret=EAvFW...d7YfX, Mode=sandbox
+[2026-04-22T08:20:07.575Z] >>> Order created successfully: 4XV97745FM5241409

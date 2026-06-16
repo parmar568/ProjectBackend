@@ -1,0 +1,204 @@
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 8%;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar.scrolled {
+  padding: 10px 8%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== LOGO ===== */
+.logo-link {
+  font-size: 24px; 
+  font-weight: 900;
+  color: #1e3c72;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.logo-link i {
+  color: #10b981;
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.2));
+}
+
+/* ===== NAV LINKS ===== */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links li a {
+  color: #475569;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #1e3c72, #10b981);
+  left: 0;
+  bottom: -6px;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+
+.nav-links li a:hover::after,
+.nav-links li a.active::after {
+  width: 100%;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: #1e3c72;
+}
+
+/* ===== LOGIN / PROFILE BUTTON ===== */
+.login-btn-nav,
+.profile-btn-nav {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #ffffff !important;
+  padding: 12px 28px !important;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(30, 60, 114, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.login-btn-nav:hover,
+.profile-btn-nav:hover {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+/* ===== FEEDBACK BUTTON ===== */
+.feedback-btn-nav {
+  background: transparent;
+  color: #475569;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+}
+
+.feedback-btn-nav::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #1e3c72, #10b981);
+  left: 0;
+  bottom: -6px;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+
+.feedback-btn-nav:hover::after {
+  width: 100%;
+}
+
+.feedback-btn-nav:hover {
+  color: #1e3c72;
+}
+
+/* ===== RESPONSIVE ===== */
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 992px) {
+  .navbar {
+    padding: 15px 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    /* Make it hidden by default using max-height/opacity/transform, 
+       here we can use display block with flex direction */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    transform: translateY(-150%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    z-index: 999;
+  }
+
+  .nav-menu.open {
+    transform: translateY(0%);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+  }
+}
