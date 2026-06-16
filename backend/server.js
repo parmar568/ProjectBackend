@@ -22,6 +22,9 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const authMiddleware = require("./middleware/authMiddleware");
 
 // Connect to Database
+if (!process.env.MONGO_URI) {
+  console.log("WARNING: MONGO_URI environment variable not found! Using local MongoDB for testing!");
+}
 connectDB();
 
 const app = express();
