@@ -65,33 +65,43 @@ app.listen(PORT, async () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
   createAdmin();
   
-  // 🔥 AUTO MIGRATION: Normalize all statuses to capitalized versions
+  // 🔥 AUTO MIGRATION: Normalize all statuses to capitalized versions (only if MongoDB is connected!)
   try {
-    await Booking.updateMany(
-      { status: { $in: ["pending", "Pending"] } },
-      { $set: { status: "Pending" } }
-    );
-    await Booking.updateMany(
-      { status: { $in: ["allocated", "Allocated"] } },
-      { $set: { status: "Allocated" } }
-    );
-    await Booking.updateMany(
-      { status: { $in: ["extended", "Extended"] } },
-      { $set: { status: "Extended" } }
-    );
-    await Booking.updateMany(
-      { status: { $in: ["completed", "Completed"] } },
-      { $set: { status: "Completed" } }
-    );
-    console.log("Status normalization migration completed.");
+    // Check if mongoose is connected first
+    if (mongoose.connection.readyState === 1) {
+      await Booking.updateMany(
+        { status: { $in: ["pending", "Pending"] } },
+        { $set: { status: "Pending" } }
+      );
+      await Booking.updateMany(
+        { status: { $in: ["allocated", "Allocated"] } },
+        { $set: { status: "Allocated" } }
+      );
+      await Booking.updateMany(
+        { status: { $in: ["extended", "Extended"] } },
+        { $set: { status: "Extended" } }
+      );
+      await Booking.updateMany(
+        { status: { $in: ["completed", "Completed"] } },
+        { $set: { status: "Completed" } }
+      );
+      console.log("Status normalization migration completed.");
+    } else {
+      console.log("MongoDB not connected yet; skipping migration for now!");
+    }
   } catch (error) {
     console.error("Migration error:", error);
   }
 });
 
-// CRON JOB: Check for expired bookings every minute
+// CRON JOB: Check for expired bookings every minute (only run if MongoDB is connected!)
 cron.schedule("* * * * *", async () => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      console.log("MongoDB not connected; skipping cron job!");
+      return;
+    }
+
     const now = new Date();
     
     // 1. Handle Active bookings: Start Overtime if time is up + 2 minutes grace
@@ -164,25 +174,24 @@ cron.schedule("* * * * *", async () => {
 
 async function createAdmin() {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      console.log("MongoDB not connected; skipping default admin creation!");
+      return;
+    }
 
     const existing = await Admin.findOne({ email: "admin@gmail.com" });
 
     if (!existing) {
-
       await Admin.create({
         email: "admin@gmail.com",
         password: "admin123"
       });
-
-     
-
+      console.log("Default admin created: admin@gmail.com / admin123");
     } else {
-
-     
-
+      console.log("Default admin already exists!");
     }
 
   } catch (error) {
-    // Silent fail
+    console.error("Error creating default admin:", error);
   }
 }
