@@ -47,7 +47,13 @@ app.get("/api/protected-route", authMiddleware, (req, res) => {
 
 // Default Route
 app.get("/", (req, res) => {
-  res.send("Parking Management System API is running...");
+  res.send("Parking Management System API is running... 🚀");
+});
+
+// Health Check Route
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok", message: "Backend is healthy and running perfectly!" });
 });
 
 // ================= SERVER =================

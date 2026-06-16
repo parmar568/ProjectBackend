@@ -1,2 +1,3 @@
 // Proxy to backend server
-require('./backend/server.js');
+const path = require('path');
+require(path.join(__dirname, 'backend', 'server.js'));
