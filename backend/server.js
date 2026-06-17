@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const cron = require("node-cron");
+const mongoose = require("mongoose");
 const connectDB = require("./config/db");
 
 
