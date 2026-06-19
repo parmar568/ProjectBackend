@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { QRCodeCanvas } from "qrcode.react";
-import { authService } from "../../services/api";
+import { authService, bookingService } from "../../services/api";
 import "./profile.css";
 
 const CountdownTimer = ({ endTime, bookingId, status, onFinish }) => {
@@ -88,7 +87,7 @@ export default function Profile() {
   
   const fetchUserBookings = async (userId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/bookings/user/${userId}`);
+      const res = await bookingService.getUserBookings(userId);
       setBookings(res.data);
       setLoading(false);
     } catch (error) {
@@ -179,9 +178,6 @@ export default function Profile() {
   const confirmPayment = async (method, status) => {
     try {
       setIsProcessing(true);
-      const endpoint = paymentType === "Extension" 
-        ? "http://localhost:5000/api/bookings/extend-booking"
-        : "http://localhost:5000/api/bookings/pay-overtime";
 
       const payload = {
         bookingId: selectedBookingForExtend,
@@ -191,23 +187,34 @@ export default function Profile() {
 
       if (paymentType === "Extension") {
         payload.extraAmount = paymentAmount;
-      } else {
-        payload.extraCharge = paymentAmount;
-      }
-
-      const res = await axios.post(endpoint, payload);
-      
-      if (status === "Paid") {
-        setPaymentSuccess(true);
-        setShowQR(false);
-        setTimeout(() => {
+        const res = await bookingService.extendBooking(payload);
+        if (status === "Paid") {
+          setPaymentSuccess(true);
+          setShowQR(false);
+          setTimeout(() => {
+            setShowPaymentModal(false);
+            fetchUserBookings(user._id);
+          }, 2000);
+        } else {
+          alert(res.data.message);
           setShowPaymentModal(false);
           fetchUserBookings(user._id);
-        }, 2000);
+        }
       } else {
-        alert(res.data.message);
-        setShowPaymentModal(false);
-        fetchUserBookings(user._id);
+        payload.extraCharge = paymentAmount;
+        const res = await bookingService.payOvertime(payload);
+        if (status === "Paid") {
+          setPaymentSuccess(true);
+          setShowQR(false);
+          setTimeout(() => {
+            setShowPaymentModal(false);
+            fetchUserBookings(user._id);
+          }, 2000);
+        } else {
+          alert(res.data.message);
+          setShowPaymentModal(false);
+          fetchUserBookings(user._id);
+        }
       }
       setIsProcessing(false);
     } catch (error) {
@@ -240,7 +247,7 @@ export default function Profile() {
   const handleCloseExtend = async () => {
     try {
       if (selectedBookingForExtend) {
-        await axios.put(`http://localhost:5000/api/bookings/update-status/${selectedBookingForExtend}`, {
+        await bookingService.updateBookingStatus(selectedBookingForExtend, {
           status: "Completed"
         });
         alert("Booking completed successfully.");
@@ -301,11 +308,7 @@ export default function Profile() {
       if (userStr) {
         const user = JSON.parse(userStr);
         if (user && user._id) {
-          await fetch("http://localhost:5000/api/logout", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId: user._id, role: role })
-          });
+          await authService.logout();
         }
       }
     } catch (error) {
@@ -347,7 +350,7 @@ export default function Profile() {
 
     if (window.confirm("Are you sure you want to cancel this booking? The slot will be released.")) {
       try {
-        await axios.delete(`http://localhost:5000/api/bookings/delete/${bookingId}`);
+        await bookingService.deleteLock(bookingId);
         alert("Booking cancelled successfully!");
         fetchUserBookings(user._id); // Refresh list
       } catch (error) {

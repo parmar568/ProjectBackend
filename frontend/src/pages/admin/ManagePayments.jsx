@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useOutletContext } from "react-router-dom";
 import { 
   MdCheckCircle, 
@@ -9,6 +8,7 @@ import {
   MdDirectionsCar,
   MdPayment
 } from "react-icons/md";
+import { bookingService } from "../../services/api";
 import "./ManageLocation.css";
 
 const ManagePayments = () => {
@@ -21,7 +21,7 @@ const ManagePayments = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/bookings/all");
+      const res = await bookingService.getAllBookings();
       setBookings(res.data);
     } catch (error) {
       console.log("Error fetching bookings:", error);
@@ -42,7 +42,7 @@ const ManagePayments = () => {
 
   const updatePaymentStatus = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/bookings/update-payment/${id}`, { paymentStatus: status });
+      await bookingService.updatePaymentStatus(id, { paymentStatus: status });
       alert(`Payment status updated to ${status}`);
       fetchBookings();
     } catch (error) {

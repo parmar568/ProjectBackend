@@ -51,14 +51,27 @@ export const authService = {
   checkEmail: (email) => API.post("/check-email", { email }),
   verifyOTP: (email, otp) => API.post("/verify-otp", { email, otp }),
   resetPasswordDirect: (email, newPassword) => API.post("/reset-password-direct", { email, newPassword }),
+  logout: () => API.post("/logout"),
 };
 
 export const bookingService = {
   getAll: () => API.get("/bookings"),
+  getAllBookings: () => API.get("/bookings/all"),
   getById: (id) => API.get(`/bookings/${id}`),
   create: (data) => API.post("/bookings", data),
+  add: (data) => API.post("/bookings/add", data),
   update: (id, data) => API.put(`/bookings/${id}`, data),
+  updatePaymentStatus: (id, data) => API.put(`/bookings/update-payment/${id}`, data),
   delete: (id) => API.delete(`/bookings/${id}`),
+  deleteLock: (id) => API.delete(`/bookings/delete/${id}`),
+  checkAvailability: (data) => API.post("/bookings/check-availability", data),
+  autoConfirmPayment: (data) => API.post("/bookings/auto-confirm-payment", data),
+  getUserBookings: (id) => API.get(`/bookings/user/${id}`),
+  extendBooking: (data) => API.post("/bookings/extend-booking", data),
+  payOvertime: (data) => API.post("/bookings/pay-overtime", data),
+  updateBookingStatus: (id, data) => API.put(`/bookings/update-status/${id}`, data),
+  getAdminBookings: () => API.get("/bookings/admin/bookings"),
+  getBookingsByLocation: (id) => API.get(`/bookings/by-location/${id}`),
 };
 
 export const locationService = {
@@ -67,6 +80,12 @@ export const locationService = {
   create: (data) => API.post("/location", data),
   update: (id, data) => API.put(`/location/${id}`, data),
   delete: (id) => API.delete(`/location/${id}`),
+  getCities: () => API.get("/location/cities"),
+  getAreasByCity: (city) => API.get(`/location/areas/${city}`),
+  addLocation: (data) => API.post("/location/add", data),
+  updateLocation: (id, data) => API.put(`/location/update/${id}`, data),
+  deleteLocation: (id) => API.delete(`/location/delete/${id}`),
+  getLocations: () => API.get("/location/get"),
 };
 
 export const dashboardService = {
@@ -77,6 +96,46 @@ export const paymentService = {
   confirmPayment: (data) => API.post("/payments/parking/payment", data),
   createPayPalOrder: (data) => API.post("/payments/create-paypal-order", data),
   capturePayPalOrder: (data) => API.post("/payments/capture-paypal-order", data),
+};
+
+export const feedbackService = {
+  submit: (data) => API.post("/feedback", data),
+  getAll: () => API.get("/feedback"),
+  delete: (id) => API.delete(`/feedback/${id}`),
+  addFeedback: (data) => API.post("/feedback/add", data),
+  getAllFeedback: () => API.get("/feedback/all"),
+};
+
+export const contactService = {
+  submit: (data) => API.post("/contact", data),
+  getAll: () => API.get("/contact"),
+  delete: (id) => API.delete(`/contact/${id}`),
+  addContact: (data) => API.post("/contact/add", data),
+  getAllContact: () => API.get("/contact/all"),
+  reply: (data) => API.post("/contact/reply", data),
+};
+
+export const userService = {
+  getAll: () => API.get("/admin/users"),
+  delete: (id) => API.delete(`/admin/users/${id}`),
+  updateStatus: (id, data) => API.put(`/admin/users/${id}/status`, data),
+  getAllUsers: () => API.get("/users/all"),
+  deleteUser: (id) => API.delete(`/users/delete/${id}`),
+};
+
+export const slotService = {
+  getAll: () => API.get("/admin/slots"),
+  create: (data) => API.post("/admin/slots", data),
+  update: (id, data) => API.put(`/admin/slots/${id}`, data),
+  delete: (id) => API.delete(`/admin/slots/${id}`),
+};
+
+export const paymentManagementService = {
+  getAll: () => API.get("/admin/payments"),
+};
+
+export const reportService = {
+  getReports: () => API.get("/admin/reports"),
 };
 
 export default API;
