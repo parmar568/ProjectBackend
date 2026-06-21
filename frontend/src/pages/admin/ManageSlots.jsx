@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "./ManageLocation.css";
 
@@ -10,7 +10,7 @@ const ManageSlots = () => {
   const cities = [...new Set(locations.map(loc => loc.city))];
   const availableAreas = locations.filter(loc => loc.city === visualizeData.city);
 
-  const fetchVisualization = async () => {
+  const fetchVisualization = useCallback(async () => {
     if (!visualizeData.locationId) return;
     try {
       const res = await axios.get(`http://localhost:5000/api/bookings/by-location/${visualizeData.locationId}`);
@@ -21,11 +21,11 @@ const ManageSlots = () => {
     } catch (error) {
       console.log("VISUALIZATION ERROR:", error);
     }
-  };
+  }, [visualizeData.locationId]);
 
   useEffect(() => {
     fetchVisualization();
-  }, [visualizeData.locationId]);
+  }, [fetchVisualization]);
 
   const fetchLocations = async () => {
     try {

@@ -5,7 +5,6 @@ import {
   MdTrendingUp,
   MdTrendingDown,
   MdMoreVert,
-  MdList,
   MdCalendarToday,
   MdAccountBalanceWallet,
   MdEventAvailable,
@@ -87,6 +86,8 @@ const Dashboard = () => {
         (booking.status?.toLowerCase() === "overtime" && booking.paymentStatus === "Paid")
       );
     }
+
+    return false;
   });
 
   // ✅ TABS WITH COUNTS

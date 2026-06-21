@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import './nav.css'
 import { NavLink } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 
 const Nav = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -19,30 +18,6 @@ const Nav = () => {
       setIsUserLoggedIn(false);
     }
   }, [location.pathname]);
-
-  const handleLogout = async () => {
-    try {
-      const userStr = sessionStorage.getItem("user_user");
-      const role = sessionStorage.getItem("user_role");
-      if (userStr) {
-        const user = JSON.parse(userStr);
-        if (user && user._id) {
-          await fetch("http://localhost:5000/api/logout", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId: user._id, role: role })
-          });
-        }
-      }
-    } catch (error) {
-      console.error("LOGOUT ERROR:", error);
-    }
-    sessionStorage.removeItem("user_user");
-    sessionStorage.removeItem("user_role");
-    sessionStorage.removeItem("user_token");
-    setIsUserLoggedIn(false);
-    navigate("/login");
-  };
 
   const isHomePage = location.pathname === "/";
 

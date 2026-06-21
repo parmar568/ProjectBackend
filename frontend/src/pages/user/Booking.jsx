@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { FaTimes, FaCheckCircle, FaSpinner, FaArrowLeft, FaCreditCard, FaWallet, FaQrcode } from "react-icons/fa";
+import { FaCheckCircle, FaSpinner, FaArrowLeft, FaCreditCard, FaWallet, FaQrcode } from "react-icons/fa";
 import { paymentService } from "../../services/api";
 import "./Booking.css";
 
@@ -21,10 +21,8 @@ const Booking = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCustomEndTime, setShowCustomEndTime] = useState(false);
   const [paymentStep, setPaymentStep] = useState("METHOD_SELECTION");
-  const [bookingResult, setBookingResult] = useState(null);
   const [upiQrUrl, setUpiQrUrl] = useState("");
   const [createdBookingId, setCreatedBookingId] = useState(null);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [selectedApp, setSelectedApp] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -89,6 +87,7 @@ const Booking = () => {
     fetchAvailability();
     const interval = setInterval(fetchAvailability, 10000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAreaDetails, formData.date, formData.startTime, formData.endTime]);
 
   useEffect(() => {
@@ -415,7 +414,6 @@ const Booking = () => {
     }
     setShowModal(false);
     setPaymentStep("METHOD_SELECTION");
-    setPaymentSuccess(false);
     setSelectedApp(null);
   };
 
