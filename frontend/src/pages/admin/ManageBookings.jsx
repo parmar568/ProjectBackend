@@ -14,7 +14,6 @@ import "./ManageLocation.css";
 
 const ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
-  const [allocationData, setAllocationData] = useState({ id: null, distance: "", mapUrl: "" });
   const { searchTerm } = useOutletContext();
 
   useEffect(() => {
@@ -95,19 +94,10 @@ const ManageBookings = () => {
       });
       
       alert(`Booking ${status}${extraCharge > 0 ? `. Extra charge of ₹${extraCharge} applied.` : ""}${updatePayment ? " and Payment marked as Paid." : ""}`);
-      setAllocationData({ id: null, distance: "", mapUrl: "" });
       fetchBookings();
     } catch (error) {
       console.log("Error updating booking status:", error);
     }
-  };
-
-  const getGoogleMapsUrl = (booking) => {
-    if (booking.mapUrl && (booking.mapUrl.startsWith("http://") || booking.mapUrl.startsWith("https://"))) {
-      return booking.mapUrl;
-    }
-    const query = `${booking.area}, ${booking.city}`;
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
   };
 
   const deleteBooking = async (id) => {
@@ -128,17 +118,6 @@ const ManageBookings = () => {
         const errorMsg = error.response?.data?.message || error.message;
         alert(`Failed to delete booking: ${errorMsg}`);
       }
-    }
-  };
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'Allocated': return '#48bb78'; // Green
-      case 'Extended': return '#3182ce'; // Blue
-      case 'Completed': return '#48bb78'; // Green for success
-      case 'Rejected': return '#e53e3e'; // Red
-      case 'Overtime': return '#e53e3e'; // Red for warning
-      default: return '#ecc94b'; // Yellow/Pending
     }
   };
 

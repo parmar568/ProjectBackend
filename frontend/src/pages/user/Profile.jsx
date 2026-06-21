@@ -127,7 +127,7 @@ export default function Profile() {
       }
     }
     return () => clearTimeout(timer);
-  }, [showExtendPopup, extendPopupTimer]);
+  }, [showExtendPopup, extendPopupTimer, user]);
 
   const handleExtend = async () => {
     // Instead of calling backend directly, show payment selection
@@ -242,6 +242,7 @@ export default function Profile() {
       handleAutoConfirm();
     }
     return () => clearInterval(timerId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showQR, countdown, paymentSuccess, selectedBookingForExtend]);
 
   const handleCloseExtend = async () => {
@@ -299,12 +300,12 @@ export default function Profile() {
       }
     }
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?._id, bookings.length]);
 
   const handleLogout = async () => {
     try {
       const userStr = sessionStorage.getItem("user_user");
-      const role = sessionStorage.getItem("user_role");
       if (userStr) {
         const user = JSON.parse(userStr);
         if (user && user._id) {
